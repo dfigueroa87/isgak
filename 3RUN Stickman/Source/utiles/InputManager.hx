@@ -42,6 +42,10 @@ class InputManager {
     	return teclas[key.charCodeAt(0)];    
     }
 	
+	public function keyPressedByCode(key:Int):Bool{
+    	return teclas[key];
+    }	
+	
 	public function release(key:String) {
 		teclas[key.charCodeAt(0)] = false;    
 	}
