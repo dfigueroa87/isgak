@@ -1,5 +1,5 @@
 package ;
-import utiles.GameElement;
+//import utiles.GameElement;
 import openfl.display.DisplayObject;
 
 /**

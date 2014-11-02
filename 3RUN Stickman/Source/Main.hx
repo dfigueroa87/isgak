@@ -4,6 +4,7 @@ package;
 import openfl.display.Sprite;
 import openfl.display.Bitmap;
 import openfl.events.Event;
+import flash.system.System;
 
 import utiles.*;
 
@@ -20,12 +21,20 @@ class Main extends GameElement {
 		this.addEventListener(Event.ENTER_FRAME, loop);
 		InputManager.getInstance().suscribe(stage);
 
-		menu =  new Menu("Bauhaus 93", 100, 0xFFFFFF, stage.stageWidth  ,"images/cursor.png" );
+		menu =  new Menu( );
+		menu.font = "Bauhaus 93";
+		menu.size = 100;
+		menu.color = 0xFFFFFF;
+		menu.widthh = stage.stageWidth;
+		menu.cursor_path = "images/cursor.png";
+		menu.sound_item_path = "sounds/punch1.ogg";
+		menu.sound_select_path = "sounds/menu_select.ogg";
+		menu.add_item("NEW GAME",newGame);
+		menu.add_item("MAX SCORES",maxScores);
+		menu.add_item("CREDITS",credits);
+		menu.add_item("EXIT",exit);
 		
-		menu.addOption("NEW GAME");
-		menu.addOption("MAX SCORES");
-		menu.addOption("CREDITS");
-		menu.addOption("EXIT");
+		menu.initialize();
 		
 		this.addChild(menu);
 		this.hijos.push(menu);
@@ -36,5 +45,17 @@ class Main extends GameElement {
 		updateLogic(0);
 	}
 	
+	public function newGame() {
+		trace("new game");
+	}
+	public function maxScores() {
+		trace("max scores");
+	}
+	public function credits() {
+		trace("credits");
+	}
+	public function exit() {
+		System.exit(0);
+	}
 	
 }

@@ -11,6 +11,7 @@
 	
 	<assets path="Assets" rename="assets" exclude="openfl.svg" />
 	<assets path="Assets/images" rename="images" include="*" />
+	<assets path="Assets/sounds" rename="sounds" include="*" />
 	
 	<icon path="Assets/openfl.svg" />
 	
