@@ -20,11 +20,12 @@ class Main extends GameElement {
 		this.addEventListener(Event.ENTER_FRAME, loop);
 		InputManager.getInstance().suscribe(stage);
 
-		menu =  new Menu("Arial", 50, 0x00BB00, stage.stageWidth , "images/avion.png" );
+		menu =  new Menu("Bauhaus 93", 100, 0xFFFFFF, stage.stageWidth  ,"images/cursor.png" );
 		
-		menu.addOption("Iniciar Partida");
-		menu.addOption("Creditos");
-		menu.addOption("Salir");
+		menu.addOption("NEW GAME");
+		menu.addOption("MAX SCORES");
+		menu.addOption("CREDITS");
+		menu.addOption("EXIT");
 		
 		this.addChild(menu);
 		this.hijos.push(menu);

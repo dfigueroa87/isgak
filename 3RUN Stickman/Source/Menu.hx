@@ -14,7 +14,11 @@ import openfl.Assets;
  */
 class Menu extends GameElement
 {
-
+	private var MARGIN_X = 50;
+	private var MARGIN_Y = 50;
+	private var MARGIN_OPTIONS_X = 10;
+	private var MARGIN_OPTIONS_Y = 0.3;
+	
 	private var font :String;
 	private var size :Int;
 	private var color:Int;
@@ -25,16 +29,25 @@ class Menu extends GameElement
 	
 	public function new(font:String, size:Int,color:Int,widthh:Int,cursor_path:String) {
 		super();
+		
+		this.y = MARGIN_Y;
+		this.x = MARGIN_X;
+		
 		this.font = font;
 		this.size = size;
 		this.color = color;
 		this.widthh = widthh;
+		
 		cursor = new Bitmap( Assets.getBitmapData (cursor_path));
+		//cursor.scaleX = 0.5;
+		//cursor.scaleY = 0.5;
+		cursor.x = 0;
+		
 		this.addChild(cursor);
 		cursor_ind = 1;
 	}
 	
-	public function addOption(texto: String) {
+	public function addOption(texto: String){
 		var format = new TextFormat();
 		format.font = font;
 		format.size = size;
@@ -45,10 +58,13 @@ class Menu extends GameElement
 		opcion.defaultTextFormat = format;
 		opcion.text = texto;
 		opcion.width = widthh;
-		opcion.y = this.numChildren * size*2;
+		opcion.y = (this.numChildren-1) * size*(1+ MARGIN_OPTIONS_Y);
 		this.addChild(opcion);
-		cursor.y = this.getChildAt(1).y;
-		cursor.x = this.getChildAt(1).x;
+		
+		opcion.x = MARGIN_OPTIONS_X;
+		
+		Aligner.centerY(cursor, this.getChildAt(1) );
+		
 	}
 	
 	private function validar_ind() {
@@ -69,8 +85,7 @@ class Menu extends GameElement
 			cursor_ind--;
 		}
 		validar_ind();
-		cursor.y = this.getChildAt(cursor_ind).y;
-		
+		Aligner.centerY(cursor, this.getChildAt(cursor_ind) );		
 	}
 	
 }
