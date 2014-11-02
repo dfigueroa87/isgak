@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="3RUNStickman" package="com.sample.project" version="1.0.0" company="Company Name" />
+	<meta title="3RUNStickman" package="com.sample.project" version="1.0.0" company="ISGAK Games" />
 	<app main="Main" path="Export" file="3RUNStickman" />
 	
 

@@ -1,4 +1,4 @@
-package utiles ;
+package;
 
 import flash.display.Sprite;
 
