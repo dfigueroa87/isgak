@@ -13,6 +13,7 @@ import utiles.*;
 class Main extends GameElement {
 	
 	private var menu : Menu;
+	private var game : Game;
 	
 	public function new () {
 		
@@ -46,7 +47,11 @@ class Main extends GameElement {
 	}
 	
 	public function newGame() {
-		trace("new game");
+		game = new Game();
+		this.removeChild(menu);
+		this.hijos.remove(menu);
+		this.addChild(game);
+		this.hijos.push(game);
 	}
 	public function maxScores() {
 		trace("max scores");
