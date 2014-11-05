@@ -16,7 +16,11 @@ class GameElement extends Sprite{
 		for(hijo in hijos){
 			hijo.updateLogic(time);
 		}
-		
 	}
-
+	
+	public function removeAllChilds() {
+		while(this.numChildren >0) {
+			this.removeChild(this.getChildAt(this.numChildren-1));
+		}
+	}
 }

@@ -9,12 +9,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="744.09448819"
-   height="1052.3622047"
+   width="800"
+   height="600"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="menu.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="403.54838"
-     inkscape:cy="780.59978"
+     inkscape:zoom="0.7"
+     inkscape:cx="337.0399"
+     inkscape:cy="294.08795"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -52,78 +52,110 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(0,-452.36218)">
     <rect
        style="fill:#5f5f5f;fill-opacity:1;stroke:none"
-       id="rect3027"
-       width="549.89978"
-       height="385.8783"
-       x="86.179649"
-       y="76.554825"
-       ry="0" />
-    <flowRoot
+       id="rect2994"
+       width="786.90881"
+       height="578.81738"
+       x="8.0812159"
+       y="465.46356" />
+    <text
        xml:space="preserve"
-       id="flowRoot2995"
-       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
-         id="flowRegion2997"><rect
-           id="rect2999"
-           width="114.28571"
-           height="85.714287"
-           x="320"
-           y="318.07648" /></flowRegion><flowPara
-         id="flowPara3001"></flowPara></flowRoot>    <flowRoot
-       xml:space="preserve"
-       id="flowRoot3005"
-       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
-         id="flowRegion3007"><rect
-           id="rect3009"
-           width="187.88837"
-           height="163.64471"
-           x="340.42142"
-           y="245.25031" /></flowRegion><flowPara
-         id="flowPara3011"></flowPara></flowRoot>    <text
-       xml:space="preserve"
-       style="font-size:68.71107483px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="415.77359"
-       y="169.90865"
-       id="text3013"
+       style="font-size:33.8821106px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Aparajita;-inkscape-font-specification:Aparajita"
+       x="180.67987"
+       y="1031.0802"
+       id="text3772"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="415.77359"
-         y="169.90865"
-         id="tspan3017"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Bauhaus 93;-inkscape-font-specification:Bauhaus 93">NEW GAME</tspan><tspan
-         sodipodi:role="line"
-         x="415.77359"
-         y="255.7975"
-         id="tspan3021"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Bauhaus 93;-inkscape-font-specification:Bauhaus 93">MAX SCORES</tspan><tspan
-         sodipodi:role="line"
-         x="415.77359"
-         y="341.68631"
-         id="tspan3023"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Bauhaus 93;-inkscape-font-specification:Bauhaus 93">CREDITS</tspan><tspan
-         sodipodi:role="line"
-         x="415.77359"
-         y="427.57516"
-         id="tspan3025"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Bauhaus 93;-inkscape-font-specification:Bauhaus 93">EXIT</tspan></text>
-    <path
-       sodipodi:type="star"
-       style="fill:none;stroke:#ffffff;stroke-width:36.58362579;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path3797"
-       sodipodi:sides="3"
-       sodipodi:cx="52.527931"
-       sodipodi:cy="119.99138"
-       sodipodi:r1="92.939522"
-       sodipodi:r2="46.469761"
-       sodipodi:arg1="0"
-       sodipodi:arg2="1.0471976"
-       inkscape:flatsided="true"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 145.46745,119.99138 -139.4092797,80.48799 0,-160.975978 z"
-       inkscape:transform-center-x="-10.073111"
-       transform="matrix(0.43353422,0,0,0.23434514,136.03304,118.64103)" />
+         id="tspan3774"
+         x="180.67987"
+         y="1031.0802"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Arial Black;-inkscape-font-specification:Arial Black">©2014  ISGAK Software</tspan></text>
+    <g
+       id="g3788"
+       transform="matrix(1.1739949,0,0,1.1739949,-24.237513,315.96781)">
+      <text
+         sodipodi:linespacing="125%"
+         id="text2990"
+         y="224.07333"
+         x="65.854774"
+         style="font-size:65.27938843px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:8.80934715px;word-spacing:0px;fill:none;stroke:#ffffff;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Aparajita;-inkscape-font-specification:Aparajita"
+         xml:space="preserve"><tspan
+           dx="0"
+           style="letter-spacing:8.80934715px;fill:none;stroke:#ffffff;stroke-width:4;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Bauhaus 93;-inkscape-font-specification:Bauhaus 93"
+           y="224.07333"
+           x="65.854774"
+           id="tspan2992"
+           sodipodi:role="line">3RUN STICKMAN</tspan></text>
+      <g
+         transform="matrix(0.94568137,0,0,0.9032623,17.801215,19.510946)"
+         id="g3784">
+        <rect
+           style="fill:none;stroke:#ffffff;stroke-width:6.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="rect3780"
+           width="644.63788"
+           height="93.495773"
+           x="36.285168"
+           y="155.57095"
+           ry="46.124577" />
+        <rect
+           ry="58.819275"
+           y="142.70471"
+           x="36.927078"
+           height="119.22828"
+           width="643.35406"
+           id="rect3782"
+           style="fill:none;stroke:#ffffff;stroke-width:6.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      </g>
+    </g>
+    <g
+       id="g3865">
+      <text
+         sodipodi:linespacing="125%"
+         id="text3013"
+         y="696.10681"
+         x="443.81836"
+         style="font-size:71.63027954px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Bauhaus 93;-inkscape-font-specification:Bauhaus 93"
+           id="tspan3017"
+           y="696.10681"
+           x="443.81836"
+           sodipodi:role="line">NEW GAME</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Bauhaus 93;-inkscape-font-specification:Bauhaus 93"
+           id="tspan3021"
+           y="785.64465"
+           x="443.81836"
+           sodipodi:role="line">MAX SCORES</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Bauhaus 93;-inkscape-font-specification:Bauhaus 93"
+           id="tspan3023"
+           y="875.1825"
+           x="443.81836"
+           sodipodi:role="line">CREDITS</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Bauhaus 93;-inkscape-font-specification:Bauhaus 93"
+           id="tspan3025"
+           y="964.72028"
+           x="443.81836"
+           sodipodi:role="line">EXIT</tspan></text>
+      <path
+         transform="matrix(0.45195301,0,0,0.24430134,130.19302,642.66106)"
+         inkscape:transform-center-x="-10.073111"
+         d="m 145.46745,119.99138 -139.4092797,80.48799 0,-160.975978 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.0471976"
+         sodipodi:arg1="0"
+         sodipodi:r2="46.469761"
+         sodipodi:r1="92.939522"
+         sodipodi:cy="119.99138"
+         sodipodi:cx="52.527931"
+         sodipodi:sides="3"
+         id="path3797"
+         style="fill:none;stroke:#ffffff;stroke-width:36.58362579;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         sodipodi:type="star" />
+    </g>
   </g>
 </svg>

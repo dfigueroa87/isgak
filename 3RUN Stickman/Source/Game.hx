@@ -6,15 +6,16 @@ import flash.display.Bitmap;
 import openfl.Assets;
 import flash.media.Sound;
 import utiles.InputManager;
-/**
- * ...
- * @author fbricker
- */
+import background.Back;
+
+
 class Game extends GameElement {
 
 	private var personaje:Personaje;
 	private var sound:flash.media.Sound;
-
+	
+	private var back = new Back();
+	
 	public function new () {
 		super();
 		
@@ -26,7 +27,11 @@ class Game extends GameElement {
 		// Los coloco en Pantalla
 		this.addChild(personaje);
 
-		this.addEventListener(flash.events.Event.ENTER_FRAME,gameLoop);	
+		this.addEventListener(flash.events.Event.ENTER_FRAME, gameLoop);	
+			
+		back.collapse_x = 5;
+		back.fill( Assets.getBitmapData ("images/buildings.png") );
+		this.addChild(back);
 	}
 	
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).

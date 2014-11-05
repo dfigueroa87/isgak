@@ -14,11 +14,11 @@ import openfl.media.Sound;
  */
 class Menu extends GameElement
 {
-	private var MARGIN_X = 50;
-	private var MARGIN_Y = 50;
-	private var MARGIN_OPTIONS_X = 10;
-	private var MARGIN_OPTIONS_Y = 0.3;
+	//private var MARGIN_X = 50;
+	//private var MARGIN_Y = 50;
 	
+	public var MARGIN_OPTIONS_X :Int;
+	public var MARGIN_OPTIONS_Y :Float;
 	public var font :String;
 	public var size :Int;
 	public var color:Int;
@@ -42,13 +42,13 @@ class Menu extends GameElement
 	}
 	
 	public function initialize() {
-		this.y = MARGIN_Y;
-		this.x = MARGIN_X;
+		//this.y = MARGIN_Y;
+		//this.x = MARGIN_X;
 		
 		cursor = new Bitmap( Assets.getBitmapData (cursor_path));
 		//cursor.scaleX = 0.5;
 		//cursor.scaleY = 0.5;
-		cursor.x = 0;
+		cursor.x = 50;
 		
 		this.addChild(cursor);
 		cursor_ind = 1;
