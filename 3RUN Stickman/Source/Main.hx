@@ -20,6 +20,7 @@ class Main extends GameElement {
 	private var menu : Menu;
 	private var game : Game;
 	private var title : Bitmap;
+	private var copy_note : TextField;
 	
 	public function new () {
 		super ();
@@ -65,7 +66,7 @@ class Main extends GameElement {
 		format.color = 0xFFFFFF;
 		format.align = TextFormatAlign.CENTER;
 		
-		var copy_note = new TextField ();
+		copy_note = new TextField ();
 		copy_note.defaultTextFormat = format;
 		copy_note.text = "©2014  ISGAK Software".substring(1,22);
 		copy_note.width = stage.stageWidth;
@@ -82,6 +83,8 @@ class Main extends GameElement {
 		game = new Game();
 		this.removeChild(menu);
 		this.hijos.remove(menu);
+		this.removeChild(title);
+		this.removeChild(copy_note);
 		this.addChild(game);
 		this.hijos.push(game);
 

@@ -16,8 +16,18 @@ class Game extends GameElement {
 	
 	private var back = new Back();
 	
+	private var platform:Plataforma;
+	
 	public function new () {
 		super();
+		
+		
+		back.collapse_x = 5;
+		back.fill( Assets.getBitmapData ("images/buildings.png") );
+		this.addChild(back);
+		
+		platform = new Plataforma();
+		this.addChild(platform);
 		
 		//Cargo los Assets
 		//obstaculo = new Bitmap (Assets.getBitmapData ("images/asteroid.png"));
@@ -29,15 +39,13 @@ class Game extends GameElement {
 
 		this.addEventListener(flash.events.Event.ENTER_FRAME, gameLoop);	
 			
-		back.collapse_x = 5;
-		back.fill( Assets.getBitmapData ("images/buildings.png") );
-		this.addChild(back);
+		
 	}
 	
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).
 	function gameLoop(e){
 		personaje.updateLogic(1/60);
-       	
+       	platform.updateLogic(1 / 60);
 	}
 
     // Detecta si obj1 y obj2 colisionan por el metodo mas simple de todos.
