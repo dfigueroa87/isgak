@@ -9,14 +9,16 @@ class Personaje extends GameElement{
 	
 	var quieto:Bitmap;
 	var corriendo:Animation;
-	//var explotando://;
+	var moving:Bool;
 	
 	public function new () {
 		super();
 		quieto = new Bitmap( Assets.getBitmapData ("images/Still.png"));
 		this.addChild(quieto);
 		this.x=50;
-		this.y=300;
+		this.y = 300;
+		moving = false;
+		
 		corriendo = new Animation( Assets.getBitmapData("images/SpriteSuperRun100.png"), 7, 1);
 		
 		this.addChild(corriendo);
@@ -35,10 +37,16 @@ class Personaje extends GameElement{
 			quieto.visible = false;
 			corriendo.visible = true;
 			x++;
+			moving = true;
 		}else{
 			corriendo.visible = false;
 			quieto.visible = true;
+			moving = false;
 		}
+	}
+	
+	public function isMoving():Bool {
+		return moving;
 	}
 
 }

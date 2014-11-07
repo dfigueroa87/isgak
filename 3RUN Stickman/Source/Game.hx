@@ -44,8 +44,10 @@ class Game extends GameElement {
 	
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).
 	function gameLoop(e){
-		personaje.updateLogic(1/60);
-       	platform.updateLogic(1 / 60);
+		personaje.updateLogic(1 / 60);
+		if (personaje.isMoving()) {
+			platform.updateLogic(1 / 60);
+		}
 	}
 
     // Detecta si obj1 y obj2 colisionan por el metodo mas simple de todos.

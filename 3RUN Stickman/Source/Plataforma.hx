@@ -14,9 +14,12 @@ class Plataforma extends GameElement {
 	static var MAX_DIF_Y = 100;
 	static var TOTAL_X_MIN = 1300;
 	static var MAX_LONG = 500;
+	static var LONG_INI = 1000;
 	
 	var circleBmp : Bitmap;
 	var circle : Sprite;
+	
+	var long : Float;
 	
 	public function new() {
 		super();
@@ -35,7 +38,9 @@ class Plataforma extends GameElement {
 		
 		this.addChild(circle);
 		
-		var suelo = new Suelo(0, 380, 1000);
+		long = LONG_INI;
+		
+		var suelo = new Suelo(0, 380, LONG_INI);
 		this.addChild(suelo);
 		this.hijos.push(suelo);
 	}
@@ -45,13 +50,16 @@ class Plataforma extends GameElement {
 		
 		circle.rotation += 30;
 		
-		if(InputManager.getInstance().keyPressedByCode(39)){
-			if (cast(hijos[hijos.length - 1], Suelo).getEndX() < TOTAL_X_MIN) {
-				var suelo = new Suelo(TOTAL_X_MIN, newHeight(hijos[hijos.length - 1].y), randWidth());
+		
+			long--;
+			if (long < TOTAL_X_MIN) {
+				var width = randWidth();
+				var suelo = new Suelo(long, newHeight(hijos[hijos.length - 1].y), width);
+				long += width;
 				this.addChild(suelo);
 				this.hijos.push(suelo);
 			}
-		}
+
 	}
 	
 	private function newHeight(y:Float):Float {
