@@ -10,31 +10,44 @@ import background.Back;
 
 
 class Game extends GameElement {
+	
+	static var MAX_DIF_Y = 100;
+	static var TOTAL_X_MIN = 700;
+	static var MAX_LONG = 500;
+	static var LONG_INI = 700;
 
 	private var personaje:Personaje;
 	private var sound:flash.media.Sound;
 	
 	private var back = new Back();
 	
-	private var platform:Plataforma;
+	private var platforms:Array<Plataforma>;
+	private var longPlatform:Float;
+	private var circle:MagicCircle;
 	
 	public function new () {
 		super();
-		
 		
 		back.collapse_x = 5;
 		back.fill( Assets.getBitmapData ("images/buildings.png") );
 		this.addChild(back);
 		
-		platform = new Plataforma();
-		this.addChild(platform);
+		platforms = new Array<Plataforma>();
+				
+		var suelo = new Plataforma(0, 380, LONG_INI);
+		platforms.push(suelo);
+		longPlatform = LONG_INI;
 		
-		//Cargo los Assets
-		//obstaculo = new Bitmap (Assets.getBitmapData ("images/asteroid.png"));
+		this.addChild(suelo);
+		this.hijos.push(suelo);
+		
+		circle = new MagicCircle();
+		circle.x = 700;
+		circle.y = 350;
+		this.addChild(circle);
+		this.hijos.push(circle);
+		
 		personaje = new Personaje();
-		//sound = Assets.getSound ("sound3");
-
-		// Los coloco en Pantalla
 		this.addChild(personaje);
 
 		this.addEventListener(flash.events.Event.ENTER_FRAME, gameLoop);	
@@ -45,9 +58,21 @@ class Game extends GameElement {
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).
 	function gameLoop(e){
 		personaje.updateLogic(1 / 60);
+		
 		if (personaje.isMoving()) {
-			platform.updateLogic(1 / 60);
+			longPlatform--;
+			if (longPlatform < TOTAL_X_MIN) {
+				var width = randWidth();
+				var y = newHeight(platforms[platforms.length - 1].getY());
+				var suelo = new Plataforma(longPlatform, y, width);
+				longPlatform += width;
+				this.addChild(suelo);
+				this.hijos.push(suelo);
+				platforms.push(suelo);
+				circle.y = y;
+			}
 		}
+
 	}
 
     // Detecta si obj1 y obj2 colisionan por el metodo mas simple de todos.
@@ -59,5 +84,23 @@ class Game extends GameElement {
 		}
 		return false;
     }
+	
+	private function newHeight(y:Float):Float {
+		if (y < 2 * MAX_DIF_Y) {
+			return y + Math.random() * MAX_DIF_Y;
+		}
+		if (y > 700) {
+			return y - Math.random() * MAX_DIF_Y;
+		}
+		
+		if (Math.random() < 0.5) {
+			return y + Math.random() * MAX_DIF_Y;
+		} else
+			return y - Math.random() * MAX_DIF_Y;
+	}
+	
+	private function randWidth():Float {
+		return Math.random() * MAX_LONG;
+	}
 		
 }

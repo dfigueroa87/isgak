@@ -1,6 +1,6 @@
 package ;
 import openfl._v2.display.Sprite;
-import openfl.display.Bitmap;
+
 import openfl.Assets;
 import utiles.InputManager;
 
@@ -14,63 +14,38 @@ class Plataforma extends GameElement {
 	static var MAX_DIF_Y = 100;
 	static var TOTAL_X_MIN = 1300;
 	static var MAX_LONG = 500;
-	static var LONG_INI = 1000;
 	
-	var circleBmp : Bitmap;
-	var circle : Sprite;
+	private var line : Sprite;
+	private var long : Float;
+	private var altura : Float;
 	
-	var long : Float;
-	
-	public function new() {
+	public function new(x:Float, y:Float, width:Float) {
 		super();
-		hijos = new Array<GameElement>();		
 		
-		circle = new Sprite();
-		circle.x = 600;
-		circle.y = 350;
- 
-		circleBmp = new Bitmap( Assets.getBitmapData ("images/magicCircle.png"));
-		circleBmp.scaleX = 0.1;
-		circleBmp.scaleY = 0.1;
-		circleBmp.x = -(circleBmp.width / 2);
-		circleBmp.y = -(circleBmp.height / 2);
-		circle.addChild(circleBmp);
+		line = new Sprite();
+		line.graphics.clear();
+		line.graphics.beginFill(0x000000);
+		line.graphics.drawRect(x,y,width,10);
+		line.graphics.endFill();
 		
-		this.addChild(circle);
+		long = width;
 		
-		long = LONG_INI;
-		
-		var suelo = new Suelo(0, 380, LONG_INI);
-		this.addChild(suelo);
-		this.hijos.push(suelo);
+		this.addChild(line);
+		this.altura = y;
 	}
 	
 	override public function updateLogic(time:Float) {
 		super.updateLogic(time);
-		
-		circle.rotation += 30;
-		
-		
-			long--;
-			if (long < TOTAL_X_MIN) {
-				var width = randWidth();
-				var suelo = new Suelo(long, newHeight(hijos[hijos.length - 1].y), width);
-				long += width;
-				this.addChild(suelo);
-				this.hijos.push(suelo);
-			}
+		if(InputManager.getInstance().keyPressedByCode(39)){
+			x--;
+		}
 
 	}
 	
-	private function newHeight(y:Float):Float {
-		if (Math.random() < 0.5) {
-			return y + Math.random() * MAX_DIF_Y;
-		} else
-			return y - Math.random() * MAX_DIF_Y;
+	public function getY() : Float {
+		return this.altura;
 	}
 	
-	private function randWidth():Float {
-		return Math.random() * MAX_LONG;
-	}
+	
 	
 }
