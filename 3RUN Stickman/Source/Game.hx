@@ -9,7 +9,7 @@ import utiles.InputManager;
 import background.Back;
 
 
-class Game extends GameElement {
+class Game extends Scene {
 	
 	static var MAX_DIF_Y = 100;
 	static var TOTAL_X_MIN = 700;
