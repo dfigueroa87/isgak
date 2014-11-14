@@ -18,7 +18,7 @@ import utiles.*;
 class Main extends GameElement {
 	
 	private var menu : Menu;
-	private var game : Game;
+	private var game : GameScene;
 	private var title : Bitmap;
 	private var copy_note : TextField;
 	
@@ -80,7 +80,7 @@ class Main extends GameElement {
 
 	
 	public function newGame() {
-		game = new Game();
+		game = new GameScene();
 		this.removeChild(menu);
 		this.hijos.remove(menu);
 		this.removeChild(title);

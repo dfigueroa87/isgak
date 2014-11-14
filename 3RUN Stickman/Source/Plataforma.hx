@@ -22,11 +22,16 @@ class Plataforma extends GameElement {
 	public function new(x:Float, y:Float, width:Float) {
 		super();
 		
+		this.x = x;
+		this.y = y;
+		
 		line = new Sprite();
 		line.graphics.clear();
 		line.graphics.beginFill(0x000000);
-		line.graphics.drawRect(x,y,width,10);
+		line.graphics.drawRect(0,0,width,10);
 		line.graphics.endFill();
+		
+		
 		
 		long = width;
 		
@@ -40,6 +45,10 @@ class Plataforma extends GameElement {
 			x--;
 		}
 
+	}
+	
+	public function move() {
+		x--;
 	}
 	
 	public function getY() : Float {

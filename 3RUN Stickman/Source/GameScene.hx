@@ -9,19 +9,20 @@ import utiles.InputManager;
 import background.Back;
 
 
-class Game extends Scene {
+class GameScene extends Scene {
 	
 	static var MAX_DIF_Y = 100;
 	static var TOTAL_X_MIN = 700;
 	static var MAX_LONG = 500;
 	static var LONG_INI = 700;
+	static var GRAVITY = 0.9;
 
 	private var personaje:Personaje;
 	private var sound:flash.media.Sound;
 	
 	private var back = new Back();
 	
-	private var platforms:Array<Plataforma>;
+	public var platforms:Array<Plataforma>;
 	private var longPlatform:Float;
 	private var circle:MagicCircle;
 	
@@ -47,7 +48,7 @@ class Game extends Scene {
 		this.addChild(circle);
 		this.hijos.push(circle);
 		
-		personaje = new Personaje();
+		personaje = new Personaje(this);
 		this.addChild(personaje);
 
 		this.addEventListener(flash.events.Event.ENTER_FRAME, gameLoop);	
@@ -76,7 +77,7 @@ class Game extends Scene {
 	}
 
     // Detecta si obj1 y obj2 colisionan por el metodo mas simple de todos.
-    private function detectarColision(obj1:GameElement,obj2:Bitmap):Bool{
+    public static function detectarColision(obj1:GameElement, obj2:GameElement):Bool {
 		if(obj1.x+obj1.width>obj2.x && obj1.x<obj2.x+obj2.width){
 		   	if(obj1.y+obj1.height>obj2.y && obj1.y<obj2.y+obj2.height){
 		   		return true;

@@ -8,28 +8,29 @@ import openfl.geom.Point;
 
 class Personaje extends GameElement{
 	
-	var quieto:Bitmap;
-	var corriendo:Animation;
+	private var quieto:Bitmap;
+	private var corriendo:Animation;
 	private var moving:Bool;
 	
+	private var scene:GameScene;
+	
 	private var acceleration:Float;
-	private var velocity:Point;
+	public var velocity:Point;
 	private var isOnGround:Bool;
 	
-	private var characterSize:Int;
-	
-	public function new () {
+	public function new (scene:GameScene) {
 		super();
+		this.scene = scene;
+		
 		quieto = new Bitmap( Assets.getBitmapData ("images/Still.png"));
 		this.addChild(quieto);
-		this.x=50;
-		this.y = 300;
+		this.x = 50;
+		this.y = 150;
 		moving = false;
 		
 		acceleration = 0.9;
 		velocity = new Point(0, 0);
-		isOnGround = true;
-		characterSize = cast(quieto.height, Int);
+		isOnGround = false;
 		
 		corriendo = new Animation( Assets.getBitmapData("images/SpriteSuperRun100.png"), 7, 1);
 		
@@ -50,29 +51,28 @@ class Personaje extends GameElement{
          
         // Movement
         if (isOnGround && InputManager.getInstance().keyPressedByCode(38)) {
-            isOnGround = false;
-            velocity.y = -14;
+            this.jump();
         }
         if (InputManager.getInstance().keyPressedByCode(39)) {
-            velocity.x = 7;
-			quieto.visible = false;
-			corriendo.visible = true;
-			moving = true;
+			this.run();
         }else if (InputManager.getInstance().keyPressedByCode(37)) {
-            velocity.x = -7;
+			this.runBack();
         }else {
-            velocity.x = 0;
-			corriendo.visible = false;
-			quieto.visible = true;
-			moving = false;
-        }
-        // Player coordinates on the grid
-        var tileCoords:Point = new Point(0, 0);
-        var approximateCoords:Point = new Point();
+			this.stop();
+		}
         
-        this.y += velocity.y;
-        checkBottomCollision(tileCoords, approximateCoords);
-        
+		if (!isOnGround) {
+			this.y += velocity.y;
+		}
+		
+		// Verify if it is on the ground
+		for(platform in scene.platforms){
+		       	if(GameScene.detectarColision(this,platform)){
+		       		velocity.y = 0;
+					isOnGround = true;
+		       	}       			
+       		}
+		
         this.x += velocity.x;
         
         // Final vertical velocity check
@@ -82,19 +82,34 @@ class Personaje extends GameElement{
 		
 	}
 	
-	private function checkBottomCollision(tileCoords:Point, approximateCoords:Point):Void {
-        // Bottom collision
-        if (velocity.y >= 0) {
-            
-            if (this.y > 400) {
-                this.y = 400;
-                velocity.y = 0;
-                isOnGround = true;
-            }
-            
-
-        }
-    }
+	private function run() {
+		velocity.x = 7;
+		quieto.visible = false;
+		corriendo.visible = true;
+		moving = true;
+	}
+	
+	private function runBack() {
+		velocity.x = -7;
+		quieto.visible = false;
+		corriendo.visible = true;
+	}
+	
+	private function jump()	{
+		isOnGround = false;
+        velocity.y = -14;
+	}
+	
+	private function stop() {
+		velocity.x = 0;
+		corriendo.visible = false;
+		quieto.visible = true;
+		moving = false;
+	}
+	
+	public function die() {
+		// TODO
+	}
 	
 	public function isMoving():Bool {
 		return moving;
