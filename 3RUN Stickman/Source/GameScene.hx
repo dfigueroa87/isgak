@@ -32,6 +32,7 @@ class GameScene extends Scene {
 		back.collapse_x = 5;
 		back.fill( Assets.getBitmapData ("images/buildings.png") );
 		this.addChild(back);
+		this.hijos.push(back);
 		
 		platforms = new Array<Plataforma>();
 				

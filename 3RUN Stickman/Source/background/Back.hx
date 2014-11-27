@@ -3,6 +3,7 @@ package background;
 import GameElement;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+import utiles.*;
 
 /**
 La clase representa un fondo repetitivo que se desplaza y no termina nunca
@@ -24,7 +25,17 @@ class Back extends GameElement{
 			bmp.x = i * (bmp.width - collapse_x);
 			trace("se agrega bitmap");
 		}
-		
+	}
+	
+	override public function updateLogic(time:Float) {
+		super.updateLogic(time);
+		if(InputManager.getInstance().keyPressedByCode(39)){
+			this.x-=1;
+		}
+		if (InputManager.getInstance().keyPressedByCode(37)) {
+			this.x+=1;
+		}
+
 	}
 	
 }

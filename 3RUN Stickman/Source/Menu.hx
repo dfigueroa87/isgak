@@ -8,6 +8,7 @@ import flash.text.TextField;
 import flash.text.TextFormat;
 import openfl.Assets;
 import openfl.media.Sound;
+import utiles.Aligner;
 /**
  * ...
  * @author ISGAK Software

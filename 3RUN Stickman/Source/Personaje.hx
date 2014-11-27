@@ -2,9 +2,8 @@ package ;
 
 import flash.display.Bitmap;
 import openfl.Assets;
-import utiles.InputManager;
+import utiles.*;
 import openfl.geom.Point;
-
 
 class Personaje extends GameElement{
 	
@@ -24,8 +23,10 @@ class Personaje extends GameElement{
 		
 		quieto = new Bitmap( Assets.getBitmapData ("images/Still.png"));
 		this.addChild(quieto);
-		this.x = 50;
-		this.y = 150;
+		
+		Aligner.centerScreenX(this);
+		Aligner.centerScreenY(this);
+		
 		moving = false;
 		
 		acceleration = 0.9;
@@ -67,13 +68,13 @@ class Personaje extends GameElement{
 		
 		// Verify if it is on the ground
 		for(platform in scene.platforms){
-		       	if(GameScene.detectarColision(this,platform)){
-		       		velocity.y = 0;
-					isOnGround = true;
-		       	}       			
-       		}
+			if(GameScene.detectarColision(this,platform)){
+				velocity.y = 0;
+				isOnGround = true;
+			}       			
+		}
 		
-        this.x += velocity.x;
+        //this.x += velocity.x;
         
         // Final vertical velocity check
         if (velocity.y != 0) {
@@ -83,14 +84,14 @@ class Personaje extends GameElement{
 	}
 	
 	private function run() {
-		velocity.x = 7;
+		//velocity.x = 7;
 		quieto.visible = false;
 		corriendo.visible = true;
 		moving = true;
 	}
 	
 	private function runBack() {
-		velocity.x = -7;
+		//velocity.x = -7;
 		quieto.visible = false;
 		corriendo.visible = true;
 	}

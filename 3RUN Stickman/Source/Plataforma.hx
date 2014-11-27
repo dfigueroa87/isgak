@@ -42,7 +42,10 @@ class Plataforma extends GameElement {
 	override public function updateLogic(time:Float) {
 		super.updateLogic(time);
 		if(InputManager.getInstance().keyPressedByCode(39)){
-			x--;
+			x-=5;
+		}
+		if (InputManager.getInstance().keyPressedByCode(37)) {
+			x+=5;
 		}
 
 	}
