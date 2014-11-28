@@ -41,6 +41,8 @@ class Plataforma extends GameElement {
 	
 	override public function updateLogic(time:Float) {
 		super.updateLogic(time);
+		if (GameElement.DIED)
+			return;
 		if(InputManager.getInstance().keyPressedByCode(39)){
 			x-=5;
 		}

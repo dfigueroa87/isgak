@@ -4,6 +4,7 @@ import flash.display.Bitmap;
 import openfl.Assets;
 import utiles.*;
 import openfl.geom.Point;
+import openfl.media.Sound;
 
 class Personaje extends GameElement{
 	
@@ -17,9 +18,17 @@ class Personaje extends GameElement{
 	public var velocity:Point;
 	private var isOnGround:Bool;
 	
+	private var sound_falling_path = "sounds/falling.ogg";
+	private var sound_jump_path = "sounds/jump.ogg";
+	private var sound_jump: Sound;
+	private var sound_falling: Sound;
+	
 	public function new (scene:GameScene) {
 		super();
 		this.scene = scene;
+		
+		sound_jump = Assets.getSound(sound_jump_path);
+		sound_falling = Assets.getSound(sound_falling_path);
 		
 		quieto = new Bitmap( Assets.getBitmapData ("images/Still.png"));
 		this.addChild(quieto);
@@ -40,13 +49,21 @@ class Personaje extends GameElement{
 		hijos.push(corriendo);		
 		
 		corriendo.x=0;
-		corriendo.y=0;
+		corriendo.y = 0;
+		
+		
 
 	}	
 	
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
 		
+		if (GameElement.DIED)
+			return;
+			
+		if (this.y > stage.stageHeight) {
+			die();
+		}
 		// Gravity
         velocity.y += acceleration;
          
@@ -99,6 +116,7 @@ class Personaje extends GameElement{
 	private function jump()	{
 		isOnGround = false;
         velocity.y = -14;
+		sound_jump.play();
 	}
 	
 	private function stop() {
@@ -110,6 +128,8 @@ class Personaje extends GameElement{
 	
 	public function die() {
 		// TODO
+		sound_falling.play();
+		GameElement.DIED = true;
 	}
 	
 	public function isMoving():Bool {

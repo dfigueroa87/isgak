@@ -6,6 +6,7 @@ class GameElement extends Sprite{
 	
 	var hijos:Array<GameElement>;
 	var estado:Int;
+	public static var DIED :Bool = false;
 	
 	public function new () {
 		super();
@@ -13,7 +14,9 @@ class GameElement extends Sprite{
 		hijos = new Array<GameElement>();
 	}
 	
-	public function updateLogic(time:Float){
+	public function updateLogic(time:Float) {
+		if (DIED)
+			return;
 		var hijo:GameElement;
 		for(hijo in hijos){
 			hijo.updateLogic(time);

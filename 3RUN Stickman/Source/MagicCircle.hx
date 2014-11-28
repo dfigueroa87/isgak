@@ -22,8 +22,10 @@ class MagicCircle extends GameElement {
 		
 	}
 	
-	override public function updateLogic(time:Float) {
+	override public function updateLogic(time:Float) {		
 		super.updateLogic(time);
+		if (GameElement.DIED)
+			return;
 		this.rotation += 30;
 	}
 	
