@@ -4,7 +4,7 @@ import flash.display.Sprite;
 import flash.Lib;
 import flash.display.Bitmap;
 import openfl.Assets;
-import flash.media.Sound;
+import openfl.media.Sound;
 import utiles.InputManager;
 import background.Back;
 
@@ -18,7 +18,6 @@ class GameScene extends Scene {
 	static var GRAVITY = 0.9;
 
 	private var personaje:Personaje;
-	private var sound:flash.media.Sound;
 	
 	private var back = new Back();
 	
@@ -26,8 +25,15 @@ class GameScene extends Scene {
 	private var longPlatform:Float;
 	private var circle:MagicCircle;
 	
+	private var backgrond_music_path:String = "sounds/Sevish_-_My_Girl_Is_Blue.ogg";
+	private var backgrond_music:Sound;
+	
 	public function new () {
 		super();
+		
+		backgrond_music = Assets.getSound(backgrond_music_path);
+		//0 = start time, 9999 is repeat count
+		backgrond_music.play(0,9999);
 		
 		back.collapse_x = 5;
 		back.fill( Assets.getBitmapData ("images/buildings.png") );
@@ -35,7 +41,7 @@ class GameScene extends Scene {
 		this.hijos.push(back);
 		
 		platforms = new Array<Plataforma>();
-				
+
 		var suelo = new Plataforma(0, 380, LONG_INI);
 		platforms.push(suelo);
 		longPlatform = LONG_INI;
