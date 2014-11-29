@@ -27,6 +27,9 @@ class GameScene extends Scene {
 	
 	private var backgrond_music_path:String = "sounds/Sevish_-_My_Girl_Is_Blue.ogg";
 	private var backgrond_music:Sound;
+	private var suelo : Plataforma;
+	
+	private var score :Score;
 	
 	public function new () {
 		super();
@@ -42,31 +45,38 @@ class GameScene extends Scene {
 		
 		platforms = new Array<Plataforma>();
 
-		var suelo = new Plataforma(0, 380, LONG_INI);
+		suelo = new Plataforma(0, 380, LONG_INI);
 		platforms.push(suelo);
 		longPlatform = LONG_INI;
 		
 		this.addChild(suelo);
 		this.hijos.push(suelo);
 		
+		personaje = new Personaje(this);
+		this.addChild(personaje);
+		
+		//SCORE
+		score = new Score();
+		score.BASE = Math.round( (personaje.x - suelo.x ) / 30 );
+		score.LABEL = "Dist ";
+		this.addChild(score);
+		this.hijos.push(score);
+		
 		circle = new MagicCircle();
 		circle.x = 700;
 		circle.y = 350;
 		this.addChild(circle);
 		this.hijos.push(circle);
-		
-		personaje = new Personaje(this);
-		this.addChild(personaje);
 
 		this.addEventListener(flash.events.Event.ENTER_FRAME, gameLoop);	
-			
 		
 	}
 	
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).
 	function gameLoop(e){
 		personaje.updateLogic(1 / 60);
-		
+		var distance = (personaje.x - suelo.x ) / 30;
+		score.setValue ( distance );
 		if (personaje.isMoving()) {
 			longPlatform--;
 			if (longPlatform < TOTAL_X_MIN) {
