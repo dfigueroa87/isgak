@@ -29,7 +29,7 @@ class Back extends GameElement{
 	
 	override public function updateLogic(time:Float) {
 		super.updateLogic(time);
-		if (GameElement.DIED)
+		if (GameElement.DEAD)
 			return;
 		if(InputManager.getInstance().keyPressedByCode(39)){
 			this.x-=1;

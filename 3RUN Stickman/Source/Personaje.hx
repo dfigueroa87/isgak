@@ -58,7 +58,7 @@ class Personaje extends GameElement{
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
 		
-		if (GameElement.DIED)
+		if (GameElement.DEAD)
 			return;
 			
 		if (this.y > stage.stageHeight) {
@@ -129,7 +129,7 @@ class Personaje extends GameElement{
 	public function die() {
 		// TODO
 		sound_falling.play();
-		GameElement.DIED = true;
+		GameElement.DEAD = true;
 	}
 	
 	public function isMoving():Bool {

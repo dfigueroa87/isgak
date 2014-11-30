@@ -31,7 +31,6 @@ class Animation extends GameElement {
 		this.width=w;
 		this.height=h;
 		cant=cols*rows;
-		trace(cant);
 		t.drawTiles(graphics,[0,0,0]);
 		totalTime=0;
 	}

@@ -11,8 +11,10 @@ import background.Back;
 
 class GameScene extends Scene {
 	
+	static var MIN_DIF_Y = 40;
 	static var MAX_DIF_Y = 100;
 	static var TOTAL_X_MIN = 700;
+	static var MIN_LONG = 50;
 	static var MAX_LONG = 500;
 	static var LONG_INI = 700;
 	static var GRAVITY = 0.9;
@@ -78,7 +80,7 @@ class GameScene extends Scene {
 		var distance = (personaje.x - suelo.x ) / 30;
 		score.setValue ( distance );
 		if (personaje.isMoving()) {
-			longPlatform--;
+			longPlatform -= 5;
 			if (longPlatform < TOTAL_X_MIN) {
 				var width = randWidth();
 				var y = newHeight(platforms[platforms.length - 1].getY());
@@ -105,20 +107,20 @@ class GameScene extends Scene {
 	
 	private function newHeight(y:Float):Float {
 		if (y < 2 * MAX_DIF_Y) {
-			return y + Math.random() * MAX_DIF_Y;
+			return y + MIN_DIF_Y + Math.random() * MAX_DIF_Y;
 		}
 		if (y > 700) {
-			return y - Math.random() * MAX_DIF_Y;
+			return y - MIN_DIF_Y - Math.random() * MAX_DIF_Y;
 		}
 		
 		if (Math.random() < 0.5) {
-			return y + Math.random() * MAX_DIF_Y;
+			return y + MIN_DIF_Y + Math.random() * MAX_DIF_Y;
 		} else
-			return y - Math.random() * MAX_DIF_Y;
+			return y - MIN_DIF_Y - Math.random() * MAX_DIF_Y;
 	}
 	
 	private function randWidth():Float {
-		return Math.random() * MAX_LONG;
+		return MIN_LONG + Math.random() * MAX_LONG;
 	}
 		
 }
