@@ -18,6 +18,7 @@ class GameScene extends Scene {
 	static var MAX_LONG = 500;
 	static var LONG_INI = 700;
 	static var GRAVITY = 0.9;
+	static var MAX_JUMP = 100;
 
 	private var personaje:Personaje;
 	
@@ -84,8 +85,9 @@ class GameScene extends Scene {
 			if (longPlatform < TOTAL_X_MIN) {
 				var width = randWidth();
 				var y = newHeight(platforms[platforms.length - 1].getY());
-				var suelo = new Plataforma(longPlatform, y, width);
-				longPlatform += width;
+				var x = MAX_JUMP + longPlatform;
+				var suelo = new Plataforma(x, y, width);
+				longPlatform += width + MAX_JUMP;
 				this.addChild(suelo);
 				this.hijos.push(suelo);
 				platforms.push(suelo);
@@ -109,7 +111,7 @@ class GameScene extends Scene {
 		if (y < 2 * MAX_DIF_Y) {
 			return y + MIN_DIF_Y + Math.random() * MAX_DIF_Y;
 		}
-		if (y > 700) {
+		if (y > 600) {
 			return y - MIN_DIF_Y - Math.random() * MAX_DIF_Y;
 		}
 		
