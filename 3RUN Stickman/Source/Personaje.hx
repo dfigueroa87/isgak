@@ -10,6 +10,7 @@ class Personaje extends GameElement{
 	
 	private var quieto:Bitmap;
 	private var corriendo:Animation;
+	private var corriendoBack:Animation;
 	private var moving:Bool;
 	
 	private var scene:GameScene;
@@ -43,15 +44,18 @@ class Personaje extends GameElement{
 		isOnGround = false;
 		
 		corriendo = new Animation( Assets.getBitmapData("images/SpriteSuperRun100.png"), 7, 1);
+		corriendoBack = new Animation( Assets.getBitmapData("images/SpriteSuperRunBack100.png"), 7, 1);
 		
 		this.addChild(corriendo);
+		this.addChild(corriendoBack);
 		
 		hijos.push(corriendo);		
+		hijos.push(corriendoBack);		
 		
-		corriendo.x=0;
+		corriendo.x = 0;
 		corriendo.y = 0;
-		
-		
+		corriendoBack.x = 0;
+		corriendoBack.y = 0;
 
 	}	
 	
@@ -103,6 +107,7 @@ class Personaje extends GameElement{
 	private function run() {
 		//velocity.x = 7;
 		quieto.visible = false;
+		corriendoBack.visible = false;
 		corriendo.visible = true;
 		moving = true;
 	}
@@ -110,7 +115,8 @@ class Personaje extends GameElement{
 	private function runBack() {
 		//velocity.x = -7;
 		quieto.visible = false;
-		corriendo.visible = true;
+		corriendo.visible = false;
+		corriendoBack.visible = true;
 	}
 	
 	private function jump()	{
@@ -122,6 +128,7 @@ class Personaje extends GameElement{
 	private function stop() {
 		velocity.x = 0;
 		corriendo.visible = false;
+		corriendoBack.visible = false;
 		quieto.visible = true;
 		moving = false;
 	}
