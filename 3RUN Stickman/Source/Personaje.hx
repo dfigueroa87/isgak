@@ -34,8 +34,8 @@ class Personaje extends GameElement{
 		quieto = new Bitmap( Assets.getBitmapData ("images/Still.png"));
 		this.addChild(quieto);
 		
-		Aligner.centerScreenX(this);
-		Aligner.centerScreenY(this);
+		Aligner.getInstance().centerScreenX(this);
+		Aligner.getInstance().centerScreenY(this);
 		
 		moving = false;
 		
@@ -137,6 +137,7 @@ class Personaje extends GameElement{
 		// TODO
 		sound_falling.play();
 		GameElement.DEAD = true;
+		Main.getInstance().setScene('menu');
 	}
 	
 	public function isMoving():Bool {

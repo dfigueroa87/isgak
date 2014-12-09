@@ -49,5 +49,9 @@ class InputManager {
 	public function release(key:String) {
 		teclas[key.charCodeAt(0)] = false;    
 	}
+	
+	public function releaseByCode(key:Int){
+    	teclas[key] = false;
+    }	
     
 }

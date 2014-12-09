@@ -9,21 +9,34 @@ import openfl.display.Stage;
  */
 class Aligner{
 	
-	public static var stage:Stage;
+	public var stage:Stage;
 	
-	public static function centerY(a:DisplayObject, b:DisplayObject) {
+	private static var instance:Aligner = null;
+	
+	public static function getInstance():Aligner{
+		if(instance==null){
+			instance=new Aligner();
+		}
+		return instance;
+	}
+	
+	public function suscribe(stage:Stage){
+		this.stage = stage;
+	}
+	
+	public function centerY(a:DisplayObject, b:DisplayObject) {
 		a.y = b.y + b.height / 2 - a.height / 2 ;
 	}
 	
-	public static function centerScreenX(a:DisplayObject) {
+	public function centerScreenX(a:DisplayObject) {
 		a.x = stage.stageWidth / 2 - a.width / 2;
 	}
 	
-	public static function centerScreenY(a:DisplayObject) {
+	public function centerScreenY(a:DisplayObject) {
 		a.y = stage.stageHeight / 2 - a.height / 2;
 	}
 	
-	public function new() {
+	private function new() {
 		
 	}
 	

@@ -18,7 +18,8 @@ class GameScene extends Scene {
 	static var MAX_LONG = 500;
 	static var LONG_INI = 700;
 	static var GRAVITY = 0.9;
-	static var MAX_JUMP = 100;
+	static var MIN_JUMP = 75;
+	static var MAX_JUMP = 150;
 
 	private var personaje:Personaje;
 	
@@ -26,7 +27,7 @@ class GameScene extends Scene {
 	
 	public var platforms:Array<Plataforma>;
 	private var longPlatform:Float;
-	private var circle:MagicCircle;
+	//private var circle:MagicCircle;
 	
 	private var backgrond_music_path:String = "sounds/Sevish_-_My_Girl_Is_Blue.ogg";
 	private var backgrond_music:Sound;
@@ -65,11 +66,11 @@ class GameScene extends Scene {
 		this.addChild(score);
 		this.hijos.push(score);
 		
-		circle = new MagicCircle();
-		circle.x = 700;
-		circle.y = 350;
-		this.addChild(circle);
-		this.hijos.push(circle);
+		//circle = new MagicCircle();
+		//circle.x = 700;
+		//circle.y = 350;
+		//this.addChild(circle);
+		//this.hijos.push(circle);
 
 		this.addEventListener(flash.events.Event.ENTER_FRAME, gameLoop);	
 		
@@ -85,13 +86,14 @@ class GameScene extends Scene {
 			if (longPlatform < TOTAL_X_MIN) {
 				var width = randWidth();
 				var y = newHeight(platforms[platforms.length - 1].getY());
-				var x = MAX_JUMP + longPlatform;
+				var jump = newJump();
+				var x = jump + longPlatform;
 				var suelo = new Plataforma(x, y, width);
-				longPlatform += width + MAX_JUMP;
+				longPlatform += width + jump;
 				this.addChild(suelo);
 				this.hijos.push(suelo);
 				platforms.push(suelo);
-				circle.y = y;
+				//circle.y = y;
 			}
 		}
 
@@ -111,7 +113,7 @@ class GameScene extends Scene {
 		if (y < 2 * MAX_DIF_Y) {
 			return y + MIN_DIF_Y + Math.random() * MAX_DIF_Y;
 		}
-		if (y > 600) {
+		if (y > 500) {
 			return y - MIN_DIF_Y - Math.random() * MAX_DIF_Y;
 		}
 		
@@ -119,6 +121,10 @@ class GameScene extends Scene {
 			return y + MIN_DIF_Y + Math.random() * MAX_DIF_Y;
 		} else
 			return y - MIN_DIF_Y - Math.random() * MAX_DIF_Y;
+	}	
+	
+	private function newJump():Float {
+		return (1 + Math.random()) * MIN_JUMP;
 	}
 	
 	private function randWidth():Float {

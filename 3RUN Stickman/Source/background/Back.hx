@@ -18,7 +18,7 @@ class Back extends GameElement{
 	}
 	
 	public function fill(bitmap_data:BitmapData ) {
-		var count = Math.floor(Aligner.stage.stageWidth / bitmap_data.width )+2;
+		var count = Math.floor(Aligner.getInstance().stage.stageWidth / bitmap_data.width )+2;
 		for (i in 0...count) {
 			var bmp = new Bitmap(bitmap_data);
 			this.addChild( bmp );

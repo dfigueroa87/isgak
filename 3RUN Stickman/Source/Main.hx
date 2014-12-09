@@ -1,103 +1,43 @@
 package;
 
-
 import openfl.display.Sprite;
 import openfl.display.Bitmap;
 import openfl.events.Event;
-import flash.system.System;
 import openfl.Assets;
-import openfl.text.TextFormatAlign;
-import flash.text.Font;
-import flash.text.TextField;
-import flash.text.TextFormat;
 
 import utiles.*;
 
 //para castear uso cast(variable, TIPO);
 
-class Main extends GameElement {
+class Main extends SceneManager {
 	
-	private var menu : Menu;
-	private var game : GameScene;
-	private var title : Bitmap;
-	private var copy_note : TextField;
+	private static var instance:SceneManager = null;
+	public static function getInstance():SceneManager {
+		return instance;
+	}
 	
 	public function new () {
-		super ();
-		this.addEventListener(Event.ENTER_FRAME, loop);
+		super();
+		instance=this;
+		stage.addEventListener(Event.ENTER_FRAME, loop);
 		InputManager.getInstance().suscribe(stage);
+		Aligner.getInstance().suscribe(stage);
 		
-		//TITULO
-		Aligner.stage = stage;
+		sceneMap.set('game', new GameScene());
+		sceneMap.set('menu', new MenuScene());
 		
-		title = new Bitmap( Assets.getBitmapData ("images/title.png"));
-		Aligner.centerScreenX(title);
-		//title.x = 25;
-		title.y = 25;
-		this.addChild(title);
-		
-		//MENU
-		menu =  new Menu( );
-		menu.font = "Bauhaus 93";
-		menu.size = 75;
-		menu.MARGIN_OPTIONS_X = 0;
-		menu.MARGIN_OPTIONS_Y = 0.2;
-		menu.color = 0xFFFFFF;
-		menu.widthh = stage.stageWidth;
-		menu.cursor_path = "images/cursor.png";
-		menu.sound_item_path = "sounds/punch1.ogg";
-		menu.sound_select_path = "sounds/menu_select.ogg";
-		menu.add_item("NEW GAME",newGame);
-		menu.add_item("MAX SCORES",maxScores);
-		menu.add_item("CREDITS",credits);
-		menu.add_item("EXIT",exit);
-		
-		menu.initialize();
-		
-		this.addChild(menu);
-		menu.x = 50;
-		menu.y = 175;
-		this.hijos.push(menu);
-		
-		//NOTA COPYRIGHT
-		var format = new TextFormat();
-		format.font = "Arial Black";
-		format.size = 35;
-		format.color = 0xFFFFFF;
-		format.align = TextFormatAlign.CENTER;
-		
-		copy_note = new TextField ();
-		copy_note.defaultTextFormat = format;
-		copy_note.text = "©2014  ISGAK Software".substring(1,22);
-		copy_note.width = stage.stageWidth;
-		copy_note.y = 540;
-		this.addChild(copy_note);
+		setScene('menu');
 	}
 	
 	public function loop(_) {
 		updateLogic(0);
 	}
-
 	
-	public function newGame() {
-		game = new GameScene();
-		this.removeChild(menu);
-		this.hijos.remove(menu);
-		this.removeChild(title);
-		this.removeChild(copy_note);
-		this.addChild(game);
-		this.hijos.push(game);
-
-	}
-	
-	public function maxScores() {
-		trace("max scores");
-	}
-	public function credits() {
-		trace("credits");
-	}
-	public function exit() {
-		System.exit(0);
+	public function onResize(_){
+		var s:Float=Math.min(stage.stageWidth/800,stage.stageHeight/600);
+		this.scaleX=this.scaleY=s;
+		this.x=(stage.stageWidth-800*s)/2;
+		this.y=(stage.stageHeight-600*s)/2;
 	}
 	
 }
