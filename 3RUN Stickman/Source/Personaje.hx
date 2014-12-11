@@ -10,8 +10,9 @@ class Personaje extends GameElement{
 	
 	private var quieto:Bitmap;
 	private var corriendo:Animation;
-	private var corriendoBack:Animation;
 	private var moving:Bool;
+	private var movingFast:Bool;
+	private var fatigue:Int;
 	
 	private var scene:GameScene;
 	
@@ -38,36 +39,27 @@ class Personaje extends GameElement{
 		Aligner.getInstance().centerScreenY(this);
 		
 		moving = false;
+		movingFast = false;
+		fatigue = 0;
 		
 		acceleration = 0.9;
 		velocity = new Point(0, 0);
 		isOnGround = false;
 		
 		corriendo = new Animation( Assets.getBitmapData("images/SpriteSuperRun100.png"), 7, 1);
-		corriendoBack = new Animation( Assets.getBitmapData("images/SpriteSuperRunBack100.png"), 7, 1);
 		
 		this.addChild(corriendo);
-		this.addChild(corriendoBack);
 		
-		hijos.push(corriendo);		
-		hijos.push(corriendoBack);		
+		hijos.push(corriendo);	
 		
 		corriendo.x = 0;
 		corriendo.y = 0;
-		corriendoBack.x = 0;
-		corriendoBack.y = 0;
 
 	}	
 	
 	override public function updateLogic(time:Float){
 		super.updateLogic(time);
-		
-		if (GameElement.DEAD)
-			return;
-			
-		if (this.y > stage.stageHeight) {
-			die();
-		}
+
 		// Gravity
         velocity.y += acceleration;
          
@@ -75,13 +67,10 @@ class Personaje extends GameElement{
         if (isOnGround && InputManager.getInstance().keyPressedByCode(38)) {
             this.jump();
         }
-        if (InputManager.getInstance().keyPressedByCode(39)) {
-			this.run();
-        }else if (InputManager.getInstance().keyPressedByCode(37)) {
-			this.runBack();
-        }else {
-			this.stop();
-		}
+		this.run();
+        if (!movingFast && InputManager.getInstance().keyPressedByCode(39) && fatigue<1) {
+			this.runFaster();
+        }
         
 		if (!isOnGround) {
 			this.y += velocity.y;
@@ -105,18 +94,24 @@ class Personaje extends GameElement{
 	}
 	
 	private function run() {
-		//velocity.x = 7;
+		if (velocity.x > 7) {
+			velocity.x --;
+		} else {
+			velocity.x = 7;
+			movingFast = false;
+			fatigue--;
+		}
 		quieto.visible = false;
-		corriendoBack.visible = false;
 		corriendo.visible = true;
 		moving = true;
 	}
 	
-	private function runBack() {
-		//velocity.x = -7;
+	private function runFaster() {
+		velocity.x += 10;
 		quieto.visible = false;
-		corriendo.visible = false;
-		corriendoBack.visible = true;
+		corriendo.visible = true;
+		movingFast = true;
+		fatigue = 20;
 	}
 	
 	private function jump()	{
@@ -128,7 +123,6 @@ class Personaje extends GameElement{
 	private function stop() {
 		velocity.x = 0;
 		corriendo.visible = false;
-		corriendoBack.visible = false;
 		quieto.visible = true;
 		moving = false;
 	}
@@ -136,12 +130,14 @@ class Personaje extends GameElement{
 	public function die() {
 		// TODO
 		sound_falling.play();
-		GameElement.DEAD = true;
-		Main.getInstance().setScene('menu');
 	}
 	
 	public function isMoving():Bool {
 		return moving;
+	}
+	
+	public function getVelocity():Float{
+		return velocity.x;
 	}
 
 }

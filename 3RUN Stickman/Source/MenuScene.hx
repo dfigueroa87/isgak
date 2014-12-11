@@ -161,6 +161,7 @@ class MenuScene extends Scene {
 	}
 	
 	public function newGame() {
+		Main.getInstance().restartGame();
 		Main.getInstance().setScene('game');
 	}
 	

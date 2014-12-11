@@ -16,22 +16,23 @@ class Plataforma extends GameElement {
 	static var MAX_LONG = 500;
 	
 	private var line : Sprite;
-	private var long : Float;
+	public var long : Float;
 	private var altura : Float;
+	
+	public var velocity : Float;
 	
 	public function new(x:Float, y:Float, width:Float) {
 		super();
 		
 		this.x = x;
 		this.y = y;
+		this.velocity = 0;
 		
 		line = new Sprite();
 		line.graphics.clear();
 		line.graphics.beginFill(0x000000);
 		line.graphics.drawRect(0,0,width,10);
 		line.graphics.endFill();
-		
-		
 		
 		long = width;
 		
@@ -41,25 +42,10 @@ class Plataforma extends GameElement {
 	
 	override public function updateLogic(time:Float) {
 		super.updateLogic(time);
-		if (GameElement.DEAD)
-			return;
-		if(InputManager.getInstance().keyPressedByCode(39)){
-			x-=5;
-		}
-		if (InputManager.getInstance().keyPressedByCode(37)) {
-			x+=5;
-		}
-
-	}
-	
-	public function move() {
-		x--;
+		x -= velocity;
 	}
 	
 	public function getY() : Float {
 		return this.altura;
 	}
-	
-	
-	
 }

@@ -11,8 +11,8 @@ import utiles.*;
 
 class Main extends SceneManager {
 	
-	private static var instance:SceneManager = null;
-	public static function getInstance():SceneManager {
+	private static var instance:Main = null;
+	public static function getInstance():Main {
 		return instance;
 	}
 	
@@ -27,10 +27,16 @@ class Main extends SceneManager {
 		sceneMap.set('menu', new MenuScene());
 		
 		setScene('menu');
+		
+		stage.addEventListener(openfl.events.Event.RESIZE,onResize);
 	}
 	
 	public function loop(_) {
 		updateLogic(0);
+	}
+	
+	public function restartGame() {
+		sceneMap.set('game', new GameScene());
 	}
 	
 	public function onResize(_){

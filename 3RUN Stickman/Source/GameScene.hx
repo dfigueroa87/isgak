@@ -18,22 +18,25 @@ class GameScene extends Scene {
 	static var MAX_LONG = 500;
 	static var LONG_INI = 700;
 	static var GRAVITY = 0.9;
-	static var MIN_JUMP = 75;
-	static var MAX_JUMP = 150;
+	static var MIN_JUMP = 110;
+	static var MAX_JUMP = 220;
 
 	private var personaje:Personaje;
 	
-	private var back = new Back();
+	private var background : FondoAnimado;
+	private var background2 : FondoAnimado;
+	private var backgroundRain : FondoAnimado;
 	
 	public var platforms:Array<Plataforma>;
 	private var longPlatform:Float;
 	//private var circle:MagicCircle;
 	
-	private var backgrond_music_path:String = "sounds/Sevish_-_My_Girl_Is_Blue.ogg";
+	private var backgrond_music_path:String = "sounds/Rain.ogg";
 	private var backgrond_music:Sound;
 	private var suelo : Plataforma;
 	
 	private var score :Score;
+	private var distance : Int;
 	
 	public function new () {
 		super();
@@ -42,10 +45,19 @@ class GameScene extends Scene {
 		//0 = start time, 9999 is repeat count
 		backgrond_music.play(0,9999);
 		
-		back.collapse_x = 5;
-		back.fill( Assets.getBitmapData ("images/buildings.png") );
-		this.addChild(back);
-		this.hijos.push(back);
+		background = new FondoAnimado("images/buildings.png", 30);
+		background2 = new FondoAnimado("images/buildings2.png", 60);
+		backgroundRain = new FondoAnimado("images/rain.png", 20);
+		
+		//back.collapse_x = 5;
+		//back.fill( Assets.getBitmapData ("images/buildings.png") );
+		this.addChild(backgroundRain);
+		this.addChild(background);
+		this.addChild(background2);
+		
+		this.hijos.push(background);
+		this.hijos.push(background2);
+		this.hijos.push(backgroundRain);
 		
 		platforms = new Array<Plataforma>();
 
@@ -60,6 +72,7 @@ class GameScene extends Scene {
 		this.addChild(personaje);
 		
 		//SCORE
+		distance = 0;
 		score = new Score();
 		score.BASE = Math.round( (personaje.x - suelo.x ) / 30 );
 		score.LABEL = "Dist ";
@@ -77,13 +90,30 @@ class GameScene extends Scene {
 	}
 	
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).
-	function gameLoop(e){
+	function gameLoop(e) {
+		if (personaje.y > stage.stageHeight) {
+			personaje.die();
+			Main.getInstance().setScene('menu');
+		}
+		for (platform in platforms) {
+			if (platform.x + platform.long < 0) {
+				this.hijos.remove(platform);
+				this.removeChild(platform);
+				platforms.remove(platform);
+			}
+		}
+		background.updateLogic(1 / 60);
+		background2.updateLogic(1 / 60);
+		backgroundRain.updateLogic(1 / 60);
 		personaje.updateLogic(1 / 60);
-		var distance = (personaje.x - suelo.x ) / 30;
-		score.setValue ( distance );
+		score.setValue ( distance++ );
 		if (personaje.isMoving()) {
-			longPlatform -= 5;
-			if (longPlatform < TOTAL_X_MIN) {
+			longPlatform -= personaje.getVelocity();
+			for (platform in platforms){
+				platform.velocity = personaje.getVelocity();
+			}
+		}
+		if (longPlatform < TOTAL_X_MIN) {
 				var width = randWidth();
 				var y = newHeight(platforms[platforms.length - 1].getY());
 				var jump = newJump();
@@ -95,7 +125,6 @@ class GameScene extends Scene {
 				platforms.push(suelo);
 				//circle.y = y;
 			}
-		}
 
 	}
 
@@ -113,7 +142,7 @@ class GameScene extends Scene {
 		if (y < 2 * MAX_DIF_Y) {
 			return y + MIN_DIF_Y + Math.random() * MAX_DIF_Y;
 		}
-		if (y > 500) {
+		if (y > 450) {
 			return y - MIN_DIF_Y - Math.random() * MAX_DIF_Y;
 		}
 		
@@ -124,7 +153,12 @@ class GameScene extends Scene {
 	}	
 	
 	private function newJump():Float {
-		return (1 + Math.random()) * MIN_JUMP;
+		if (Math.random() < 0.8) {
+			return (1 + Math.random()) * MIN_JUMP;
+		}
+		else {
+			return (1 + Math.random()) * MAX_JUMP;
+		}
 	}
 	
 	private function randWidth():Float {
