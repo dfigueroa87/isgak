@@ -28,6 +28,7 @@ class Personaje extends GameElement{
 	public function new (scene:GameScene) {
 		super();
 		this.scene = scene;
+		this.estado = 1;
 		
 		sound_jump = Assets.getSound(sound_jump_path);
 		sound_falling = Assets.getSound(sound_falling_path);
@@ -58,6 +59,8 @@ class Personaje extends GameElement{
 	}	
 	
 	override public function updateLogic(time:Float){
+		if (estado == 0) return;
+		
 		super.updateLogic(time);
 
 		// Gravity
@@ -129,6 +132,7 @@ class Personaje extends GameElement{
 	
 	public function die() {
 		// TODO
+		this.estado = 0;
 		sound_falling.play();
 	}
 	

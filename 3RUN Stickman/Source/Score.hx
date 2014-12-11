@@ -7,7 +7,7 @@ import openfl.text.TextField;
 class  Score extends GameElement{
 	
 	private var SIZE : Int = 30;
-	private var value : Int = 0;
+	public var value : Int = 0;
 	public var font :String = "Bauhaus 93";
 	public var size :Int = 30;
 	public var color:Int = 0xFFFFFF;

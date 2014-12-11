@@ -6,8 +6,12 @@ import flash.display.Bitmap;
 import openfl.Assets;
 import openfl.media.Sound;
 import utiles.InputManager;
-import background.Back;
-
+import utiles.Aligner;
+import openfl.text.TextFormatAlign;
+import flash.text.Font;
+import flash.text.TextField;
+import flash.text.TextFormat;
+import haxe.Timer;
 
 class GameScene extends Scene {
 	
@@ -33,7 +37,6 @@ class GameScene extends Scene {
 	
 	private var backgrond_music_path:String = "sounds/Rain.ogg";
 	private var backgrond_music:Sound;
-	private var suelo : Plataforma;
 	
 	private var score :Score;
 	private var distance : Int;
@@ -61,7 +64,7 @@ class GameScene extends Scene {
 		
 		platforms = new Array<Plataforma>();
 
-		suelo = new Plataforma(0, 380, LONG_INI);
+		var suelo = new Plataforma(0, 380, LONG_INI);
 		platforms.push(suelo);
 		longPlatform = LONG_INI;
 		
@@ -91,10 +94,15 @@ class GameScene extends Scene {
 	
 	// Nuestro gameLoop (se ejecuta antes de cada cuadro).
 	function gameLoop(e) {
+		if (personaje.estado == 0) return;
+		
 		if (personaje.y > stage.stageHeight) {
 			personaje.die();
-			Main.getInstance().setScene('menu');
+			showFinalScore();
+			
 		}
+		
+		// Eliminar plataformas pasadas
 		for (platform in platforms) {
 			if (platform.x + platform.long < 0) {
 				this.hijos.remove(platform);
@@ -102,10 +110,12 @@ class GameScene extends Scene {
 				platforms.remove(platform);
 			}
 		}
+		
 		background.updateLogic(1 / 60);
 		background2.updateLogic(1 / 60);
 		backgroundRain.updateLogic(1 / 60);
 		personaje.updateLogic(1 / 60);
+		
 		score.setValue ( distance++ );
 		if (personaje.isMoving()) {
 			longPlatform -= personaje.getVelocity();
@@ -137,6 +147,32 @@ class GameScene extends Scene {
 		}
 		return false;
     }
+	
+	private function showFinalScore(){
+		for (element in hijos) {
+			element.alpha = 0.2;
+		}
+
+		var format = new TextFormat();
+		format.font = "Bauhaus 93";
+		format.size = 40;
+		format.color = 0xFFFFFF;
+		format.align = TextFormatAlign.CENTER;
+		
+		var finalScore = new TextField ();
+		finalScore.width = Aligner.getInstance().stage.stageWidth;
+		finalScore.defaultTextFormat = format;
+		finalScore.text = "You weren't good enough." + '\n' + "Your score: " + score.value;
+		Aligner.getInstance().centerScreenX(finalScore);
+		Aligner.getInstance().centerScreenY(finalScore);
+		this.addChild(finalScore);
+		
+		Timer.delay(goToMenu, 5000);
+	}
+	
+	private function goToMenu(){
+		Main.getInstance().setScene('menu');
+	}
 	
 	private function newHeight(y:Float):Float {
 		if (y < 2 * MAX_DIF_Y) {
