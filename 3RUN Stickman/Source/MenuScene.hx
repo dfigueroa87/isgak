@@ -137,7 +137,7 @@ class MenuScene extends Scene {
 		if (cursor_ind > items.length)
 			cursor_ind = 1;
 		if (cursor_ind <1 )
-			cursor_ind = items.length-1;
+			cursor_ind = items.length;
 	}
 	
 	override public function updateLogic(time:Float) {

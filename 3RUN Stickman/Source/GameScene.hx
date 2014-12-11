@@ -19,13 +19,13 @@ class GameScene extends Scene {
 	static var LONG_INI = 700;
 	static var GRAVITY = 0.9;
 	static var MIN_JUMP = 110;
-	static var MAX_JUMP = 220;
+	static var MAX_JUMP = 200;
 
 	private var personaje:Personaje;
 	
 	private var background : FondoAnimado;
 	private var background2 : FondoAnimado;
-	private var backgroundRain : FondoAnimado;
+	private var backgroundRain : FondoLluvia;
 	
 	public var platforms:Array<Plataforma>;
 	private var longPlatform:Float;
@@ -46,13 +46,13 @@ class GameScene extends Scene {
 		backgrond_music.play(0,9999);
 		
 		background = new FondoAnimado("images/buildings.png", 30);
-		background2 = new FondoAnimado("images/buildings2.png", 60);
-		backgroundRain = new FondoAnimado("images/rain.png", 20);
+		background2 = new FondoAnimado("images/buildings2.png", 80);
+		backgroundRain = new FondoLluvia("images/rain.png", 50);
 		
-		//back.collapse_x = 5;
-		//back.fill( Assets.getBitmapData ("images/buildings.png") );
-		this.addChild(backgroundRain);
+		backgroundRain.alpha = 0.5;
+		
 		this.addChild(background);
+		this.addChild(backgroundRain);
 		this.addChild(background2);
 		
 		this.hijos.push(background);
