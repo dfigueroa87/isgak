@@ -20,6 +20,11 @@ class Personaje extends GameElement{
 	public var velocity:Point;
 	private var isOnGround:Bool;
 	
+	private var SPEED_FAST = 15;
+	private var SPEED_NORMAL = 8;
+	private var SPEED_SLOW = 6;
+	private var JUMP_STRENGHT = 17;
+	
 	private var sound_falling_path = "sounds/falling.ogg";
 	private var sound_jump_path = "sounds/jump.ogg";
 	private var sound_jump: Sound;
@@ -38,6 +43,8 @@ class Personaje extends GameElement{
 		
 		Aligner.getInstance().centerScreenX(this);
 		Aligner.getInstance().centerScreenY(this);
+		
+		y -= 100;
 		
 		moving = false;
 		movingFast = false;
@@ -71,6 +78,10 @@ class Personaje extends GameElement{
             this.jump();
         }
 		this.run();
+		//run slow
+		if (InputManager.getInstance().keyPressedByCode(37)) {
+			this.runSlow();
+        }
         if (!movingFast && InputManager.getInstance().keyPressedByCode(39) && fatigue<1) {
 			this.runFaster();
         }
@@ -81,7 +92,8 @@ class Personaje extends GameElement{
 		
 		// Verify if it is on the ground
 		for(platform in scene.platforms){
-			if(GameScene.detectarColision(this,platform)){
+			if (GameScene.detectarColisionPersonaje(this, platform)) {
+				y = platform.y - height;
 				velocity.y = 0;
 				isOnGround = true;
 			}       			
@@ -97,10 +109,10 @@ class Personaje extends GameElement{
 	}
 	
 	private function run() {
-		if (velocity.x > 7) {
+		if (velocity.x > SPEED_NORMAL) {
 			velocity.x --;
 		} else {
-			velocity.x = 7;
+			velocity.x = SPEED_NORMAL;
 			movingFast = false;
 			fatigue--;
 		}
@@ -109,8 +121,12 @@ class Personaje extends GameElement{
 		moving = true;
 	}
 	
+	private function runSlow() {
+		velocity.x = SPEED_SLOW;
+	}
+	
 	private function runFaster() {
-		velocity.x += 10;
+		velocity.x += SPEED_FAST;
 		quieto.visible = false;
 		corriendo.visible = true;
 		movingFast = true;
@@ -119,7 +135,7 @@ class Personaje extends GameElement{
 	
 	private function jump()	{
 		isOnGround = false;
-        velocity.y = -14;
+        velocity.y = -JUMP_STRENGHT;
 		sound_jump.play();
 	}
 	

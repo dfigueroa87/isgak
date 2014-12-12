@@ -12,6 +12,7 @@ esta compuesta por una o más sprites consecutivos repetidos en un patrón
 class Back extends GameElement{
 	
 	public var collapse_x : Int = 0;
+	public var bmp : Bitmap;
 	
 	public function new() {
 		super();
@@ -20,7 +21,7 @@ class Back extends GameElement{
 	public function fill(bitmap_data:BitmapData ) {
 		var count = Math.floor(Aligner.getInstance().stage.stageWidth / bitmap_data.width )+2;
 		for (i in 0...count) {
-			var bmp = new Bitmap(bitmap_data);
+			bmp= new Bitmap(bitmap_data);
 			this.addChild( bmp );
 			bmp.x = i * (bmp.width - collapse_x);
 			trace("se agrega bitmap");
@@ -31,5 +32,7 @@ class Back extends GameElement{
 		super.updateLogic(time);
 		this.x-=1;
 	}
+		if ( -x > bmp.width)
+			x = 0;
 	
 }

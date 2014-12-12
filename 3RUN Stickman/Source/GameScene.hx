@@ -149,6 +149,15 @@ class GameScene extends Scene {
 		return false;
     }
 	
+	public static function detectarColisionPersonaje(obj1:GameElement, pers:GameElement):Bool {
+		if(obj1.x+obj1.width>pers.x && obj1.x<pers.x+pers.width){
+		   	if(obj1.y+obj1.height>pers.y && obj1.y<pers.y+ pers.height/10 ){
+		   		return true;
+		   	}
+		}
+		return false;
+    }
+	
 	private function showFinalScore(){
 		for (element in hijos) {
 			element.alpha = 0.2;
