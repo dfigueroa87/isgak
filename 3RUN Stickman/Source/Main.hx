@@ -26,6 +26,7 @@ class Main extends SceneManager {
 		sceneMap.set('game', new GameScene());
 		sceneMap.set('menu', new MenuScene());
 		sceneMap.set('maxscore', new MaxScoreScene());
+		sceneMap.set('credits', new CreditsScene());
 		
 		setScene('menu');
 		
@@ -38,10 +39,6 @@ class Main extends SceneManager {
 	
 	public function restartGame() {
 		sceneMap.set('game', new GameScene());
-	}
-	
-	public function restartMaxScore() {
-		sceneMap.set('maxscore', new MaxScoreScene());
 	}
 	
 	public function onResize(_){

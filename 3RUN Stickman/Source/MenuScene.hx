@@ -169,7 +169,7 @@ class MenuScene extends Scene {
 		Main.getInstance().setScene('maxscore');
 	}
 	public function credits() {
-		trace("credits");
+		Main.getInstance().setScene('credits');
 	}
 	public function exit() {
 		System.exit(0);
