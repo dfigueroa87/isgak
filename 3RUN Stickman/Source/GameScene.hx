@@ -7,6 +7,7 @@ import openfl.Assets;
 import openfl.media.Sound;
 import utiles.InputManager;
 import utiles.Aligner;
+import utiles.Persistence;
 import openfl.text.TextFormatAlign;
 import flash.text.Font;
 import flash.text.TextField;
@@ -163,6 +164,7 @@ class GameScene extends Scene {
 		finalScore.width = Aligner.getInstance().stage.stageWidth;
 		finalScore.defaultTextFormat = format;
 		finalScore.text = "You weren't good enough." + '\n' + "Your score: " + score.value;
+		Persistence.setScore(score.value);
 		Aligner.getInstance().centerScreenX(finalScore);
 		Aligner.getInstance().centerScreenY(finalScore);
 		this.addChild(finalScore);
